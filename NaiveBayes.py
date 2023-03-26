@@ -34,3 +34,27 @@ def Predict(Inp):
         if(i == 'yes'):
             count += 1
         flag += 1
+    ProYes = count/flag
+    ProNo = 1-ProYes
+    LiOdYes, LiOdNo = ProYes, ProNo
+    for i in range(len(Inp)):
+        LiOdYes *= ProbabilityFunc(DataTrain.columns[i], Inp[i], DataTrain.columns[-1], 'yes')
+        LiOdNo *= ProbabilityFunc(DataTrain.columns[i], Inp[i], DataTrain.columns[-1], 'no')
+    if(LiOdYes > LiOdNo):
+        return 'yes'
+    else:
+        return 'no'
+
+def Accuracy(Data):
+    correct = 0
+    for i in range(len(Data)):
+        instance = Data.iloc[i, :-1].values
+        ActualClass = Data.iloc[i, -1]
+        PredictedClass = Predict(instance)
+        print(instance)
+        print(PredictedClass)
+        if ActualClass == PredictedClass:
+            correct += 1
+    return correct / len(Data)
+
+print('Accuracy:', Accuracy(DataTest))
