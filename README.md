@@ -8,3 +8,6 @@ After executing the code, it will directly divide the data set into Train Test s
 
 Then it will print the Accuracy based on the Test split.
 
+To do specific classification, you can add Predict function with your desired input instances.
+
+Based on the Accuracy the system classifies your given input.
